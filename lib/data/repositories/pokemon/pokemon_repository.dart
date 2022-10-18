@@ -1,0 +1,26 @@
+import 'package:test_pokedex/core/network/network_client.dart';
+import 'package:test_pokedex/data/repositories/pokemon/model/pokemon.dart';
+
+class PokemonRepository {
+  final NetworkClient _api;
+  PokemonRepository(this._api);
+
+  Future<List<Pokemon>> getPokemonList({
+    int page = 0,
+    int? limit,
+    String? name,
+    String? type,
+  }) {
+    Map<String, dynamic> params = {};
+    params['page'] = page;
+    if (limit != null) params['limit'] = limit;
+    if (name != null && name.isNotEmpty) params['name'] = name;
+    if (type != null) params['type'] = type;
+
+    return _api.get('pokemon', queryParameters: params).then((response) {
+      return response.data['data']
+          .map<Pokemon>((item) => Pokemon.fromJson(item))
+          .toList();
+    });
+  }
+}
