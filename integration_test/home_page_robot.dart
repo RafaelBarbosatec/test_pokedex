@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:test_pokedex/core/di/injector.dart';
 
-import '../../util/robot.dart';
+import 'util/robot.dart';
 
 class HomePageRobot extends Robot {
   String bulbasaurName = 'Bulbasaur';
